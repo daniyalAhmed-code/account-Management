@@ -18,7 +18,7 @@ resource "aws_api_gateway_model" "AccountId_Model" {
   "title": "Account Id",
   "type": "object",
   "properties": {
-      Organization":{ "type": "string" },
+      "Organization":{ "type": "string" },
       "budgetContact": {
         "type": "string"
       },
@@ -117,12 +117,12 @@ resource "aws_api_gateway_resource" "euid_resource" {
   path_part   = "{euid}"
 }
 
-resource "aws_api_gateway_base_path_mapping" "api-gateway-base-path-mapping" {
-  api_id      = "${aws_api_gateway_rest_api.api-gateway.id}"
-  stage_name  = "${aws_api_gateway_deployment.api-gateway-deployment.stage_name}"
-  domain_name = "${local.domainName}"
-  base_path = "actmgmt-aws"
-}
+# resource "aws_api_gateway_base_path_mapping" "api-gateway-base-path-mapping" {
+#   api_id      = "${aws_api_gateway_rest_api.api-gateway.id}"
+#   stage_name  = "${aws_api_gateway_deployment.api-gateway-deployment.stage_name}"
+#   domain_name = "${local.domainName}"
+#   base_path = "actmgmt-aws"
+# }
 
 ### Option Method For Root ###
 
@@ -480,7 +480,7 @@ resource "aws_api_gateway_method_response" "update_accounts_table_method_respons
 
 resource "aws_lambda_permission" "update_accounts_table_permission" {
   function_name = "${var.LAMBDA_UPDATE_ACCOUNTS_TABLE_NAME}"
-  statement_id  = "update-accounts-table"
+  statement_id  = "update-accounts-table-dan"
   action        = "lambda:InvokeFunction"
   principal     = "apigateway.amazonaws.com"
   source_arn = "${aws_api_gateway_rest_api.api-gateway.execution_arn}/*/*"
@@ -545,7 +545,7 @@ resource "aws_api_gateway_method_response" "get_account_info_method_response_200
 
 resource "aws_lambda_permission" "get_account_info_permission" {
   function_name = "${var.LAMBDA_GET_ACCOUNT_INFO_NAME}"
-  statement_id  = "get-account-info"
+  statement_id  = "get-account-info-dan"
   action        = "lambda:InvokeFunction"
   principal     = "apigateway.amazonaws.com"
   source_arn = "${aws_api_gateway_rest_api.api-gateway.execution_arn}/*/*"
@@ -610,7 +610,7 @@ resource "aws_api_gateway_method_response" "list_cust_accounts_method_response_2
 
 resource "aws_lambda_permission" "list_cust_accounts_permission" {
   function_name = "${var.LAMBDA_LIST_CUST_ACCOUNTS_NAME}"
-  statement_id  = "list-cust-accounts"
+  statement_id  = "list-cust-accounts-dan"
   action        = "lambda:InvokeFunction"
   principal     = "apigateway.amazonaws.com"
   source_arn = "${aws_api_gateway_rest_api.api-gateway.execution_arn}/*/*"
