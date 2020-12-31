@@ -225,9 +225,6 @@ exports.handler = async(event, context, callback) => {
         const requestEuid = "xyz";
         let cuid = token.split("|")
         cuid = cuid[1]
-        console.log("customer-api-keys")
-        console.log(process.env.STAGE)
-        console.log(cuid)
         let tableName = `${process.env.STAGE}-customer-api-keys-${cuid}`;
         console.log(tableName)
         

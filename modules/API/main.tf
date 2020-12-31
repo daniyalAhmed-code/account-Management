@@ -117,12 +117,12 @@ resource "aws_api_gateway_resource" "euid_resource" {
   path_part   = "{euid}"
 }
 
-# resource "aws_api_gateway_base_path_mapping" "api-gateway-base-path-mapping" {
-#   api_id      = "${aws_api_gateway_rest_api.api-gateway.id}"
-#   stage_name  = "${aws_api_gateway_deployment.api-gateway-deployment.stage_name}"
-#   domain_name = "${local.domainName}"
-#   base_path = "actmgmt-aws"
-# }
+resource "aws_api_gateway_base_path_mapping" "api-gateway-base-path-mapping" {
+  api_id      = "${aws_api_gateway_rest_api.api-gateway.id}"
+  stage_name  = "${aws_api_gateway_deployment.api-gateway-deployment.stage_name}"
+  domain_name = "${local.domainName}"
+  base_path = "actmgmt-aws"
+}
 
 ### Option Method For Root ###
 
@@ -442,7 +442,7 @@ resource "aws_api_gateway_method" "update_accounts_table_method" {
   }
   
   request_validator_id = "${aws_api_gateway_request_validator.update-account-request-validator.id}"
-  # authorization = "NONE"
+
 }
 
 resource "aws_api_gateway_integration" "update_accounts_table_integration" {
@@ -513,9 +513,7 @@ resource "aws_api_gateway_method" "get_account_info_method" {
   depends_on = [
     "aws_api_gateway_authorizer.api-gateway-authorizer"
   ]
-  # authorization = "NONE"
-  # request_validator_id = "${aws_api_gateway_request_validator.get-account-details-request-validator.id}"
-  # authorization = "NONE"
+
 }
 
 resource "aws_api_gateway_integration" "get_account_info_integration" {
